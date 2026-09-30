@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Sneslador</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' app:; img-src 'self' app: data: blob:; media-src 'self' app: data: blob:; style-src 'self' 'unsafe-inline' app:; script-src 'self' app: 'unsafe-eval'; connect-src 'self' app: data: blob:">
+<link rel="stylesheet" href="../shared/style.css">
+<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+<div id="app">
+  <header id="top"></header>
+  <div id="body">
+    <aside id="left"></aside>
+    <div id="splitL" class="split"></div>
+    <main id="center">
+      <div id="tabs" class="tabs"></div>
+      <div id="views"></div>
+    </main>
+    <div id="splitR" class="split"></div>
+    <aside id="right"></aside>
+  </div>
+  <footer id="bottom">
+    <div id="consoleHead" class="row">
+      <b>Console</b><span class="muted" id="consoleHint">mensagens do compilador, erros e avisos</span>
+      <div class="spacer"></div>
+      <button class="btn small" id="consoleClear">Limpar</button>
+    </div>
+    <div id="console" class="scroll mono"></div>
+  </footer>
+</div>
+<script type="module" src="editor.js"></script>
+</body>
+</html>

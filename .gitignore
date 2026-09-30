@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.toolchain/
+build-resources/pvsneslib/
+app/vendor/
+tests/out/
+*.log

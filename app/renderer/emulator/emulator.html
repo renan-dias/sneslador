@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Emulador SNES</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0d0f1a; overflow: hidden; color: #ddd; font-family: "Segoe UI", sans-serif; }
+  #game { width: 100%; height: 100%; }
+  #msg { position: absolute; inset: 0; display: grid; place-items: center; font-size: 15px; }
+</style>
+</head>
+<body>
+<div id="msg">Carregando a ROM no emulador (snes9x)...</div>
+<div id="game"></div>
+<script>
+  // A ROM vem do processo principal (janela aberta pela engine) ou de ?rom=<url> (testes).
+  (async () => {
+    const params = new URLSearchParams(location.search);
+    let url = params.get('rom');
+    let name = params.get('name') || 'jogo';
+    if (!url && window.sneslador) {
+      const r = await window.sneslador.emulatorRom();
+      if (!r) { document.getElementById('msg').textContent = 'Nenhuma ROM para rodar.'; return; }
+      url = URL.createObjectURL(new Blob([r.data], { type: 'application/octet-stream' }));
+      name = r.name;
+      document.title = `SNES — ${name}`;
+    }
+    document.getElementById('msg').remove();
+    Object.assign(window, {
+      EJS_player: '#game',
+      EJS_core: 'snes',
+      EJS_gameUrl: url,
+      EJS_gameName: name,
+      EJS_pathtodata: '../../vendor/emulatorjs/',
+      EJS_startOnLoaded: true,
+      EJS_language: 'pt-BR',
+      EJS_color: '#7c5cff',
+      EJS_backgroundColor: '#0d0f1a',
+      EJS_threads: false,
+      EJS_disableDatabases: true,
+      EJS_Buttons: { playPause: true, restart: true, mute: true, settings: true, fullscreen: true, saveState: true, loadState: true, screenRecord: false, gamepad: true, cheat: false, volume: true, saveSavFiles: false, loadSavFiles: false, quickSave: false, quickLoad: false, screenshot: true, cacheManager: false, exitEmulation: false },
+    });
+    const s = document.createElement('script');
+    s.src = '../../vendor/emulatorjs/loader.js';
+    document.body.appendChild(s);
+  })();
+</script>
+</body>
+</html>

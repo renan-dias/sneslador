@@ -1,0 +1,81 @@
+{
+  "name": "sneslador",
+  "productName": "Sneslador",
+  "version": "0.1.0",
+  "description": "Engine educacional para criar jogos retrô e exportar ROMs de SNES para o RetroPie",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.js",
+    "postinstall": "node scripts/vendor-emulator.js",
+    "icon": "node scripts/make-icon.js",
+    "prepare-toolchain": "node scripts/prepare-toolchain.js",
+    "dist": "node scripts/prepare-toolchain.js && node scripts/patch-makensis.js && electron-builder --win --publish never",
+    "release": "node scripts/prepare-toolchain.js && node scripts/patch-makensis.js && electron-builder --win --publish never"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@emulatorjs/core-snes9x": "^4.2.3",
+    "@emulatorjs/emulatorjs": "^4.2.3",
+    "electron": "^44.5.0",
+    "electron-builder": "^26.15.3"
+  },
+  "type": "module",
+  "author": {
+    "name": "Sneslador"
+  },
+  "homepage": "https://github.com/seu-usuario/sneslador",
+  "build": {
+    "appId": "br.feira.sneslador",
+    "productName": "Sneslador",
+    "copyright": "Sneslador — engine educacional de jogos retrô",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build-resources"
+    },
+    "files": [
+      "app/**/*",
+      "package.json",
+      "!app/vendor/emulatorjs/cores/*-thread-*",
+      "!app/vendor/emulatorjs/cores/*-legacy-*"
+    ],
+    "asar": false,
+    "extraResources": [
+      {
+        "from": "build-resources/pvsneslib",
+        "to": "pvsneslib"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build-resources/icon.png",
+      "artifactName": "Sneslador-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Sneslador",
+      "installerLanguages": [
+        "pt_BR"
+      ],
+      "language": "1046",
+      "license": "LICENSE.txt",
+      "differentialPackage": false
+    },
+    "electronLanguages": [
+      "pt-BR",
+      "en-US"
+    ],
+    "compression": "maximum"
+  }
+}

@@ -1,0 +1,34 @@
+# Gera o instalador do Windows e publica numa release do GitHub.
+# Como usar: crie uma tag de versão e envie →  git tag v0.2.0 && git push origin v0.2.0
+# O Hub do Sneslador baixa automaticamente a release marcada como "latest".
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Versão do package.json = tag
+        shell: bash
+        run: npm version --no-git-tag-version "${GITHUB_REF_NAME#v}" --allow-same-version
+      - run: npm ci
+      - run: npm test
+      - name: Gerar instalador
+        run: npm run dist
+      - name: Publicar release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/Sneslador-Setup-*.exe
+          generate_release_notes: true
+          make_latest: true

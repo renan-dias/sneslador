@@ -1,0 +1,36 @@
+Sneslador — engine educacional de jogos retrô
+==============================================
+
+Licença MIT
+
+Permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia
+deste software e dos arquivos de documentação associados, para usar, copiar,
+modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do
+software, desde que este aviso de copyright e esta permissão sejam incluídos
+em todas as cópias ou partes substanciais do software.
+
+O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM GARANTIA DE QUALQUER
+TIPO, EXPRESSA OU IMPLÍCITA.
+
+Os jogos que você cria com o Sneslador são seus.
+
+----------------------------------------------------------------------------
+Componentes de terceiros incluídos
+----------------------------------------------------------------------------
+
+PVSnesLib (compilador 816-tcc, WLA-DX, snesmod e bibliotecas)
+  Copyright (C) 2012-2026 Alekmaul — licença zlib
+  https://github.com/alekmaul/pvsneslib
+
+EmulatorJS (interface do emulador embutido)
+  Licença GPL-3.0 — código-fonte em https://github.com/EmulatorJS/EmulatorJS
+
+Snes9x (núcleo de emulação usado pelo EmulatorJS)
+  Licença própria do Snes9x: uso gratuito e NÃO comercial.
+  https://github.com/snes9xgit/snes9x
+
+Fonte 8x8 baseada na font8x8_basic de Daniel Hepper (domínio público).
+
+"Super Nintendo", "SNES", "Tetris", "Pac-Man" e "Super Mario Bros." são marcas
+de seus respectivos donos. O Sneslador não é afiliado a eles; os modelos de
+jogo usam arte e personagens originais, apenas inspirados nesses clássicos.
